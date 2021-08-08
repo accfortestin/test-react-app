@@ -1,0 +1,21 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: 72px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-template-areas: 
+  "header header"
+  "aside content";
+  grid-gap: 10px;
+  width: 1440px;
+  margin: auto;
+}
+
+.sidebar {
+  grid-area: aside;
+  background-color: #57394a;
+  padding: 10px;
+}
+
+.content {
+  grid-area: content;
+}

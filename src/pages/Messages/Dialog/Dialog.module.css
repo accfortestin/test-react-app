@@ -1,0 +1,23 @@
+.dialog {
+    padding: 15px 15px 15px 30px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.dialog::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: cadetblue;
+    border-radius: 50%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.dialog.active {
+    font-size: 18px;
+}

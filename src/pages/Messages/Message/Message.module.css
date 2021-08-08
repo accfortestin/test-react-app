@@ -1,0 +1,42 @@
+.message {
+    display: flex;
+    align-items: flex-start;
+    max-width: 70%;
+}
+
+.message:not(:last-child) {
+    margin-bottom: 40px;
+}
+
+.person {
+    margin-right: 60px;
+}
+
+.image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.name {
+    text-align: center;
+}
+
+.cloud {
+    position: relative;
+    padding: 20px;
+    border: 1px solid cadetblue;
+    border-radius: 8px;
+}
+
+.cloud::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-top: 1px solid cadetblue;
+    border-left: 1px solid cadetblue;
+    top: 20px;
+    left: 0;
+    transform: translateX(-50%) rotate(-45deg);
+}

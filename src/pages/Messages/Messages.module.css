@@ -1,0 +1,43 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dialogs {
+    flex-basis: 33.333%;
+    padding: 0 10px;
+    border-right: 1px solid #57394a;
+}
+
+.wrapper h2 {
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 0;
+    flex-basis: 100%;
+}
+
+.messages {
+    padding: 0 60px;
+}
+
+.messagesInput {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    font-size: 16px;
+    width: 100%;
+    resize: none;
+}
+
+.messagesInput:focus {
+    outline: none;
+}
+
+.sendButton {
+    padding: 4px 15px;
+    background-color: #57394a;
+    color: white;
+    border: none;
+    margin-left: auto;
+    display: block;
+}

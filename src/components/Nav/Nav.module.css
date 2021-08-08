@@ -1,0 +1,8 @@
+.item {
+    color: white;
+    display: block;
+}
+
+.item.active {
+    color: gold;
+}
