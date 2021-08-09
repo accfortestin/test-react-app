@@ -69,25 +69,3 @@
     color: #57394a;
     margin-bottom: 20px;
 }
-
-.pagination {
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    width: 90%;
-    max-height: 50px;
-    overflow-y: scroll;
-}
-
-.pagination span {
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.pagination span:not(:last-child) {
-    margin-right: 5px;
-}
-
-.pagination .current {
-    font-weight: 500;
-}

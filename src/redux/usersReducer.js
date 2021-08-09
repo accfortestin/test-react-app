@@ -6,8 +6,6 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const SET_FETCHING_STATUS = 'SET_FETCHING_STATUS';
 const SET_FOLLOWING_PROGRESS = 'SET_FOLLOWING_PROGRESS';
-const SET_PAGES_COUNT = 'SET_PAGES_COUNT';
-const SET_PAGIINATION = 'SET_PAGIINATION';
 
 let initialState = {
     users: [],
@@ -16,8 +14,6 @@ let initialState = {
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],
-    pagination: [],
-    pagesCount: null
 
 }
 
@@ -64,27 +60,6 @@ let usersReducer = (state = initialState, action) => {
                 [...state.followingInProgress, action.userID] 
                 : state.followingInProgress.filter(id => id !== action.userID)
             }
-        case SET_PAGES_COUNT:
-            let pagesCount = Math.ceil(state.totalUsersCount / state.pageSize);
-            return {
-                ...state,
-                pagesCount: pagesCount
-            }
-        case SET_PAGIINATION:
-            let pagination = [];
-            if (state.currentPage > 5) {
-                pagination.push(1);
-            }
-            for (let i = state.currentPage - 4; i <= state.currentPage + 4; i++) {
-                if (i > 0 && i < state.pagesCount) {
-                    pagination.push(i);
-                }
-            }
-            pagination.push(state.pagesCount);
-            return {
-                ...state,
-                pagination: [...pagination]
-            }
         default:
             return state;
     }
@@ -101,17 +76,9 @@ export const setUsers = (users) => ({
     users
 })
 
-export const setPagesCount = () => ({
-    type: SET_PAGES_COUNT
-})
-
 export const setCurrentPage = (currentPage) => ({
     type: SET_CURRENT_PAGE,
     currentPage
-})
-
-export const setPagination = () => ({
-    type: SET_PAGIINATION
 })
 
 export const setTotalUsersCount = (count) => ({
@@ -141,8 +108,6 @@ export const getUsers = (pageSize, currentPage) => {
             dispatch(setFetchingStatus(false));
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount));
-            dispatch(setPagesCount());
-            dispatch(setPagination());
         })
     }
 }

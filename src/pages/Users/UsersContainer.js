@@ -38,6 +38,8 @@ class UsersComponent extends React.Component {
           onFollowButtonClick={this.onFollowButtonClick}
           followingInProgress={this.props.followingInProgress}
           pagination={this.props.pagination}
+          totalUsersCount={this.props.totalUsersCount}
+          pageSize={this.props.pageSize}
         />}
     </>
   }
