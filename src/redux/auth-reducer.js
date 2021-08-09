@@ -41,37 +41,30 @@ export const setErrorText = (error) => ({
 
 //thunks 
 
-export const getAuth = () => {
-    return (dispatch) => {
-        return authAPI.getAuth().then(data => {
-            if (data.resultCode === 0) {
-                let {id, email, login} = data.data;
-                dispatch(setUserAuthData(id, email, login, true));
-            }
-        })
+export const getAuth = () => async (dispatch) => {
+    let data = await authAPI.getAuth();
+    if (data.resultCode === 0) {
+        let { id, email, login } = data.data;
+        dispatch(setUserAuthData(id, email, login, true));
     }
 }
 
 export const logIn = (logInData) => {
-    let {email, password, rememberMe} = logInData;
-    return (dispatch) => {
-        authAPI.login(email, password, rememberMe).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(getAuth());
-            } else {
-                dispatch(setErrorText(data.messages));
-            }
-        })
+    let { email, password, rememberMe } = logInData;
+    return async (dispatch) => {
+        let data = await authAPI.login(email, password, rememberMe)
+        if (data.resultCode === 0) {
+            dispatch(getAuth());
+        } else {
+            dispatch(setErrorText(data.messages));
+        }
     }
 }
 
-export const logOut = () => {
-    return (dispatch) => {
-        authAPI.logout().then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setUserAuthData(null, null, null, false));
-            }
-        })
+export const logOut = () => async (dispatch) => {
+    let data = await authAPI.logout()
+    if (data.resultCode === 0) {
+        dispatch(setUserAuthData(null, null, null, false));
     }
 }
 

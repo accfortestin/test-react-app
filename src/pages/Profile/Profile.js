@@ -4,7 +4,6 @@ import PostsContainer from "./Posts/PostsContainer";
 import Preloader from "../../components/Preloader/Preloader";
 
 function Profile(props) {
-
     if (props.profileData == null) {
         return <Preloader />
     }

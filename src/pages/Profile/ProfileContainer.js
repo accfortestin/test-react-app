@@ -23,10 +23,6 @@ class ProfileComponent extends React.Component {
         this.props.getProfile(this.state.userID);
     }
 
-    
-    
-    
-
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.userID !== this.props.match.params.userID) {
             this.props.getProfile(this.props.match.params.userID);
