@@ -6,6 +6,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const SET_FETCHING_STATUS = 'SET_FETCHING_STATUS';
 const SET_FOLLOWING_PROGRESS = 'SET_FOLLOWING_PROGRESS';
+const SET_PORTION_NUMBER = 'SET_PORTION_NUMBER';
 
 let initialState = {
     users: [],
@@ -14,7 +15,7 @@ let initialState = {
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],
-
+    portionNumber: 1
 }
 
 let usersReducer = (state = initialState, action) => {
@@ -60,6 +61,11 @@ let usersReducer = (state = initialState, action) => {
                 [...state.followingInProgress, action.userID] 
                 : state.followingInProgress.filter(id => id !== action.userID)
             }
+        case SET_PORTION_NUMBER:
+            return {
+                ...state,
+                portionNumber: action.number
+            }
         default:
             return state;
     }
@@ -95,6 +101,11 @@ export const setFollowingProgress = (status, userID) => ({
     type: SET_FOLLOWING_PROGRESS,
     status,
     userID
+})
+
+export const setPortionNumber = (number) => ({
+    type: SET_PORTION_NUMBER,
+    number
 })
 
 

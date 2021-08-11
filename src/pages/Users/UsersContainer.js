@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import Users from "./Users"
-import { setCurrentPage, getUsers, follow, unfollow } from "../../redux/usersReducer"
+import { setCurrentPage, getUsers, follow, unfollow, setPortionNumber } from "../../redux/usersReducer"
 import React from "react"
 import Preloader from "../../components/Preloader/Preloader"
 
@@ -40,6 +40,8 @@ class UsersComponent extends React.Component {
           pagination={this.props.pagination}
           totalUsersCount={this.props.totalUsersCount}
           pageSize={this.props.pageSize}
+          portionNumber={this.props.portionNumber}
+          setPortionNumber={this.props.setPortionNumber}
         />}
     </>
   }
@@ -53,10 +55,11 @@ let mapStateToProps = (state) => {
     currentPage: state.users.currentPage,
     isFetching: state.users.isFetching,
     followingInProgress: state.users.followingInProgress,
-    pagination: state.users.pagination
+    pagination: state.users.pagination,
+    portionNumber: state.users.portionNumber
   }
 }
 
-const UsersContainer = connect(mapStateToProps, { setCurrentPage, getUsers, follow, unfollow })(UsersComponent);
+const UsersContainer = connect(mapStateToProps, { setCurrentPage, getUsers, follow, unfollow, setPortionNumber })(UsersComponent);
   
 export default UsersContainer;

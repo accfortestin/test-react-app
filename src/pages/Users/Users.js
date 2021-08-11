@@ -3,7 +3,7 @@ import userPhoto from './../../assets/images/default_avatar.jpg'
 import { NavLink } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
 
-let Users = ({ usersList, followingInProgress, onFollowButtonClick, totalUsersCount, pageSize, currentPage, onPageChange }) => {
+let Users = ({ usersList, followingInProgress, onFollowButtonClick, totalUsersCount, pageSize, currentPage, onPageChange, setPortionNumber, portionNumber }) => {
 
     return (
         <div className={styles.wrapper}>
@@ -35,7 +35,9 @@ let Users = ({ usersList, followingInProgress, onFollowButtonClick, totalUsersCo
                 currentPage={currentPage}
                 onPageChange={onPageChange}
                 totalUsersCount={totalUsersCount}
-                pageSize={pageSize} />
+                pageSize={pageSize}
+                setPortionNumber={setPortionNumber}
+                portionNumber={portionNumber} />
         </div>
     )
 }
