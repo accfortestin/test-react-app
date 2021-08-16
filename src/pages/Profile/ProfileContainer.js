@@ -1,14 +1,12 @@
 import React from 'react'
 import { connect } from "react-redux"
 import Profile from './Profile'
-import { getProfile } from '../../redux/profileReducer'
+import { getProfile, uploadMainPhoto } from '../../redux/profileReducer'
 import { authUserIDGetter } from '../../redux/state-selectors'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 class ProfileComponent extends React.Component {
-
-    // let [userID] = useState(props.match.params.userID);
 
     state = ({
         userID: this.props.match.params.userID
@@ -29,17 +27,29 @@ class ProfileComponent extends React.Component {
         }
     }
 
-    render() { return <Profile {...this.props}/> }
+    onUploadingMainPhoto = (e) => {
+        if (e.target.files.length) {
+            this.props.uploadMainPhoto(e.target.files[0]);
+        }  
+    }
+    
+    render() {
+        return <Profile
+            {...this.props}
+            currentProfileUserID={this.state.userID}
+            onUploadingMainPhoto={this.onUploadingMainPhoto}
+        />
+    }
 
 }
 
 let mapStateToProps = (state) => ({
     profileData: state.profilePage.userProfileData,
     isAuth: state.auth.isAuth,
-    authUserID: authUserIDGetter(state)
+    authUserID: authUserIDGetter(state)    
 });
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {getProfile})
+    connect(mapStateToProps, {getProfile, uploadMainPhoto})
 )(ProfileComponent);

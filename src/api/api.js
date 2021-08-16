@@ -29,7 +29,15 @@ export const profileAPI = {
     },
     updateUserStatus(status) {
         return instance.put(`/profile/status/`, {status: status}).then(response => response.data)
-    }
+    },
+    uploadMainPhoto(photo) {
+        const formData = new FormData();
+        formData.append('image', photo);
+        return instance.put(`/profile/photo/`, formData).then(response => response.data)
+    },
+    editProfileData(newData) {
+        return instance.put(`/profile`, {...newData}).then(response => response.data)
+    },
 }
 
 export const authAPI = {

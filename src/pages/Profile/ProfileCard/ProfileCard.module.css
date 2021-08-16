@@ -3,8 +3,8 @@
 }
 
 .image {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     margin-right: 20px;
 }
 
@@ -15,4 +15,26 @@
 
 .status {
     margin-bottom: 30px;
+}
+
+.photoInput {
+    display: none;
+}
+
+.photoInputLabel {
+    cursor: pointer;
+}
+
+.contactItem {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}
+
+.contactItem:not(:last-child) {
+    margin-right: 5px;
+}
+
+.contacts {
+    padding: 10px 0;
 }

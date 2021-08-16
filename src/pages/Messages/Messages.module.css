@@ -10,9 +10,6 @@
 }
 
 .wrapper h2 {
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-top: 0;
     flex-basis: 100%;
 }
 

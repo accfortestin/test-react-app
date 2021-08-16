@@ -3,6 +3,8 @@ import { profileAPI } from "../api/api";
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const UPDATE_MAIN_PHOTO = 'UPDATE_MAIN_PHOTO';
+const UPDATE_PROFILE_DATA = 'UPDATE_PROFILE_DATA';
 
 let initialState = {
     postData: [
@@ -52,6 +54,16 @@ let profileReducer = (state = initialState, action) => {
                 ...state,
                 userStatus: action.status
             };
+        case UPDATE_MAIN_PHOTO:
+            return {
+                ...state,
+                userProfileData: {...state.userProfileData, photos: action.photos}
+            };
+        case UPDATE_PROFILE_DATA:
+            return {
+                ...state,
+                userProfileData: {...state.userProfileData, ...action.newData}
+            };
         default:
             return state;
     }
@@ -70,6 +82,11 @@ export const setUserProfile = (profileData) => ({
 export const setUserStatus = (status) => ({
     type: SET_USER_STATUS,
     status
+})
+
+export const updateMainPhoto = (photos) => ({
+    type: UPDATE_MAIN_PHOTO,
+    photos
 })
 
 //thunks
@@ -96,6 +113,25 @@ export const updateUserStatus = (status) => {
         
         if (data.resultCode === 0) {
             dispatch(setUserStatus(status))
+        }
+    }
+}
+
+export const uploadMainPhoto = (photo) => {
+    return async (dispatch) => {
+        let data = await profileAPI.uploadMainPhoto(photo)
+        if (data.resultCode === 0) {
+            dispatch(updateMainPhoto(data.data.photos))
+        }
+    }
+}
+
+export const editProfileData = (newData) => {
+    return async (dispatch, getState) => {
+        const id = getState().auth.id;
+        let data = await profileAPI.editProfileData(newData)
+        if (data.resultCode === 0) {
+            dispatch(getProfile(id));
         }
     }
 }

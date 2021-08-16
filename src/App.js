@@ -10,7 +10,7 @@ import Preloader from './components/Preloader/Preloader';
 import LoginContainer from './pages/Login/LoginContainer';
 import News from './pages/News/News';
 import ProfileContainer from './pages/Profile/ProfileContainer';
-import Settings from './pages/Settings/Settings';
+import SettingsContainer from './pages/Settings/SettingsContainer';
 import { initializeApp } from './redux/app-reducer'
 
 const MessagesContainer = React.lazy(() => import('./pages/Messages/MessagesContainer'));
@@ -39,7 +39,7 @@ class App extends React.Component {
           <Route path="/messages"><Suspense fallback={<Preloader />}><MessagesContainer /></Suspense></Route>
           <Route path="/news"><News /></Route>
           <Route path="/users"><Suspense fallback={<Preloader />}><UsersContainer /></Suspense></Route>
-          <Route path="/settings"><Settings /></Route>
+          <Route path="/settings"><SettingsContainer /></Route>
           <Route path="/login"><LoginContainer /></Route>
         </div>
       </div>
