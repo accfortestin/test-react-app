@@ -2,6 +2,7 @@ import React from 'react'
 import { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router';
+import { Switch } from 'react-router-dom';
 import styles from './App.module.css';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -34,13 +35,16 @@ class App extends React.Component {
           <FriendsContainer />
         </aside>
         <div className={styles.content}>
-          <Route exact path="/"><ProfileContainer /></Route>
-          <Route path="/profile/:userID?"><ProfileContainer /></Route>
-          <Route path="/messages"><Suspense fallback={<Preloader />}><MessagesContainer /></Suspense></Route>
-          <Route path="/news"><News /></Route>
-          <Route path="/users"><Suspense fallback={<Preloader />}><UsersContainer /></Suspense></Route>
-          <Route path="/settings"><SettingsContainer /></Route>
-          <Route path="/login"><LoginContainer /></Route>
+          <Switch>
+            <Route exact path="/"><ProfileContainer /></Route>
+            <Route path="/profile/:userID?"><ProfileContainer /></Route>
+            <Route path="/messages"><Suspense fallback={<Preloader />}><MessagesContainer /></Suspense></Route>
+            <Route path="/news"><News /></Route>
+            <Route path="/users"><Suspense fallback={<Preloader />}><UsersContainer /></Suspense></Route>
+            <Route path="/settings"><SettingsContainer /></Route>
+            <Route path="/login"><LoginContainer /></Route>
+            <Route path="*"><div>404</div></Route>
+          </Switch>  
         </div>
       </div>
     );

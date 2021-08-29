@@ -23,6 +23,12 @@ let Login = (props) => {
                     <input id='rememberMe' className={styles.checkbox} {...register('rememberMe')} type='checkbox' />
                     <label htmlFor='rememberMe' className={styles.label +  ' ' + styles.rememberMe} >remember me</label>
                 </div>
+                {props.captchaURL && 
+                    <>
+                    <div className={styles.captcha}><img src={props.captchaURL} alt="" /></div>
+                    <input id='captcha' className={styles.input} {...register('captcha', { required: true })} />
+                    </>
+                }
                 {props.error && <div className={styles.error}>{props.error}</div>}
                 {errors.password || errors.email ? <button className={styles.submitButton} disabled >Submit</button> : <button className={styles.submitButton} >Submit</button>}
                 

@@ -17,6 +17,7 @@ class LoginComponent extends React.Component {
             return <Login
                     onSubmit={this.onSubmit}
                     error={this.props.error}
+                    captchaURL={this.props.captchaURL}
                 />
         }
         return <Redirect to={`/profile/${this.props.userID}`} />
@@ -27,7 +28,8 @@ let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
         userID: state.auth.id,
-        error: state.auth.error
+        error: state.auth.error,
+        captchaURL: state.auth.captchaURL
     }
   }
 

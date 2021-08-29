@@ -73,3 +73,7 @@
 .inputWrapper.rememberMe {
     display: flex;
 }
+
+.captcha {
+    width: 250px;
+}
