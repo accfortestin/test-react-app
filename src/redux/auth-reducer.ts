@@ -4,7 +4,16 @@ const SET_USER_DATA = 'SET_USER_DATA';
 const SET_ERROR_TEXT = 'SET_ERROR_TEXT';
 const SET_URL_CAPTCHA = 'SET_URL_CAPTCHA';
 
-let initialState = {
+export type InitialStateType = {
+    id: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean
+    error: null | string
+    captchaURL: null | string
+}
+
+let initialState: InitialStateType = {
     id: null,
     email: null,
     login: null,
@@ -13,7 +22,7 @@ let initialState = {
     captchaURL: null
 }
 
-let authReducer = (state = initialState, action) => {
+let authReducer = (state = initialState, action: any): InitialStateType  => {
 
     switch (action.type) {
         case SET_USER_DATA:
@@ -36,24 +45,46 @@ let authReducer = (state = initialState, action) => {
     }
 }
 
-export const setUserAuthData = (id, email, login, isAuth) => ({
+type UserAuthDataType = {
+    id: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean | null
+}
+
+type SetUserAuthDataType = {
+    type: typeof SET_USER_DATA
+    data: UserAuthDataType
+}
+
+export const setUserAuthData = (id: number | null, email: string | null, login: string | null, isAuth: boolean | null): SetUserAuthDataType => ({
     type: SET_USER_DATA,
     data: {id, email, login, isAuth}
 })
 
-export const setErrorText = (error) => ({
+type SetErrorTextType = {
+    type: typeof SET_ERROR_TEXT
+    error: string | null
+}
+
+export const setErrorText = (error: string): SetErrorTextType => ({
     type: SET_ERROR_TEXT,
     error
 })
 
-export const setCaptchaURL = (captchaURL) => ({
+type SetCaptchaURLType = {
+    type: typeof SET_URL_CAPTCHA
+    captchaURL: string | null
+}
+
+export const setCaptchaURL = (captchaURL: string | null): SetCaptchaURLType => ({
     type: SET_URL_CAPTCHA,
     captchaURL
 })
 
 //thunks 
 
-export const getAuth = () => async (dispatch) => {
+export const getAuth = () => async (dispatch: any) => {
     let data = await authAPI.getAuth();
     if (data.resultCode === 0) {
         let { id, email, login } = data.data;
@@ -61,9 +92,16 @@ export const getAuth = () => async (dispatch) => {
     }
 }
 
-export const logIn = (logInData) => {
+type LogInDataType = {
+    email: string | null
+    password: string | null
+    rememberMe: boolean
+    captcha: string | null
+}
+
+export const logIn = (logInData: LogInDataType) => {
     let { email, password, rememberMe, captcha } = logInData;
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         let data = await authAPI.login(email, password, rememberMe, captcha)
         if (data.resultCode === 0) {
             dispatch(getAuth());
@@ -78,7 +116,7 @@ export const logIn = (logInData) => {
     }
 }
 
-export const logOut = () => async (dispatch) => {
+export const logOut = () => async (dispatch: any) => {
     let data = await authAPI.logout()
     if (data.resultCode === 0) {
         dispatch(setUserAuthData(null, null, null, false));

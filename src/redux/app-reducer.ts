@@ -2,11 +2,15 @@ import { getAuth } from "./auth-reducer";
 
 const SET_INITIALIZING_STATUS = 'SET_INITIALIZING_STATUS';
 
-let initialState = {
+export type InitialStateType = {
+    isInitialized: boolean
+}
+
+let initialState: InitialStateType = {
     isInitialized: false
 }
 
-let appReducer = (state = initialState, action) => {
+let appReducer = (state = initialState, action: any): InitialStateType => {
 
     switch (action.type) {
         case SET_INITIALIZING_STATUS:
@@ -19,14 +23,18 @@ let appReducer = (state = initialState, action) => {
     }
 }
 
-export const setInitializingStatus = () => ({
+type SetInitializingStatusType = {
+    type: typeof SET_INITIALIZING_STATUS
+}
+ 
+export const setInitializingStatus = (): SetInitializingStatusType => ({
     type: SET_INITIALIZING_STATUS
 })
 
 //thunks 
 
 export const initializeApp = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         let authInit = dispatch(getAuth());
         Promise.all([authInit])
             .then(() => {

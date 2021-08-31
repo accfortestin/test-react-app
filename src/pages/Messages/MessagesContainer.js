@@ -9,7 +9,9 @@ import { compose } from "redux"
 class MessagesComponent extends React.Component {
 
     onSendMessage = (data) => {
-        this.props.sendMessage(data.newMessageText);
+        if (data.newMessageText.length) {
+            this.props.sendMessage(data.newMessageText);
+        }
     }
 
     render() {
