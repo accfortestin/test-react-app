@@ -8,10 +8,19 @@ const SET_FETCHING_STATUS = 'SET_FETCHING_STATUS';
 const SET_FOLLOWING_PROGRESS = 'SET_FOLLOWING_PROGRESS';
 const SET_PORTION_NUMBER = 'SET_PORTION_NUMBER';
 
-
+export type UsersType = {
+    name: string
+    id: number
+    photos: {
+        small: string | null
+        large: string | null
+    }
+    status: string | null
+    followed: boolean
+}
 
 let initialState = {
-    users: [] as Array<any>,
+    users: [] as Array<UsersType>,
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,

@@ -2,8 +2,21 @@ import styles from "./Users.module.css"
 import userPhoto from './../../assets/images/default_avatar.jpg'
 import { NavLink } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
+import { UsersType } from "../../redux/usersReducer";
 
-let Users = ({ usersList, followingInProgress, onFollowButtonClick, totalUsersCount, pageSize, currentPage, onPageChange, setPortionNumber, portionNumber }) => {
+type PropsType = {
+    usersList: Array<UsersType>
+    followingInProgress: Array<number>
+    onFollowButtonClick: (id: number, isFollowed: boolean) => void
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChange: (currentPage: number) => void
+    portionNumber: number
+    setPortionNumber: (number: number) => void
+}
+
+let Users: React.FC<PropsType> = ({ usersList, followingInProgress, onFollowButtonClick, totalUsersCount, pageSize, currentPage, onPageChange, portionNumber, setPortionNumber }) => {
 
     return (
         <div className={styles.wrapper}>
@@ -36,8 +49,8 @@ let Users = ({ usersList, followingInProgress, onFollowButtonClick, totalUsersCo
                 onPageChange={onPageChange}
                 totalUsersCount={totalUsersCount}
                 pageSize={pageSize}
-                setPortionNumber={setPortionNumber}
-                portionNumber={portionNumber} />
+                portionNumber={portionNumber}
+                setPortionNumber={setPortionNumber} />
         </div>
     )
 }

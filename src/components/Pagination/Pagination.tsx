@@ -1,7 +1,16 @@
 import { useState } from "react";
 import styles from "./Pagination.module.css"
 
-let Pagination = ({ currentPage, onPageChange, totalUsersCount, pageSize, portionNumber, setPortionNumber }) => {
+type PropsType = {
+    currentPage: number
+    onPageChange: (currentPage: number) => void
+    totalUsersCount: number
+    pageSize: number
+    portionNumber: number
+    setPortionNumber: (number: number) => void
+}
+
+let Pagination: React.FC<PropsType> = ({ currentPage, onPageChange, totalUsersCount, pageSize, setPortionNumber, portionNumber }) => {
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
     let [portionSize] = useState(10);
