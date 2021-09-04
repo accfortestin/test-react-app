@@ -1,13 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
 import Login from "./Login";
-import { logIn } from "../../redux/auth-reducer";
+import { logIn, LogInDataType } from "../../redux/auth-reducer";
 import { Redirect } from "react-router-dom";
+import { AppStateType } from "../../redux/redux-store";
 
+type MapStateToPropsType = {
+    isAuth: boolean
+    userID: number
+    error: string | null
+    captchaURL: string | null
+}
 
-class LoginComponent extends React.Component {
+type MapDispatchToPropsType = {
+    logIn: (logInData: LogInDataType) => void
+}
 
-    onSubmit = (data) => {
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+class LoginComponent extends React.Component<PropsType> {
+
+    onSubmit = (data: LogInDataType) => {
         this.props.logIn(data);
         
     };
@@ -24,7 +37,7 @@ class LoginComponent extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth,
         userID: state.auth.id,
@@ -33,6 +46,6 @@ let mapStateToProps = (state) => {
     }
   }
 
-const LoginContainer = connect(mapStateToProps, {logIn})(LoginComponent);
+const LoginContainer = connect<MapStateToPropsType, MapDispatchToPropsType, AppStateType>(mapStateToProps, {logIn})(LoginComponent);
 
 export default LoginContainer;

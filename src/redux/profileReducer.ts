@@ -6,32 +6,25 @@ const SET_USER_STATUS = 'SET_USER_STATUS';
 const UPDATE_MAIN_PHOTO = 'UPDATE_MAIN_PHOTO';
 const UPDATE_PROFILE_DATA = 'UPDATE_PROFILE_DATA';
 
-type PostDataType = {
+export type PostDataType = {
     id: number
     message: string
     likeCounter: number
 }
 
-type ContactsType = {
-    facebook: string | null
-    github: string | null
-    instagram: string | null
-    mainLink: string | null
-    twitter: string | null
-    vk: string | null
-    website: string | null
-    youtube: string | null
+export type ContactsType = {
+    [key: string]: string
 }
 
-type PhotosType = {
+export type PhotosType = {
     small: string | null
     large: string | null
 }
 
-type UserProfileDataType = {
+export type UserProfileDataType = {
     aboutMe: string | null
     contacts: ContactsType
-    fullName: string
+    fullName: string | null
     lookingForAJob: boolean
     lookingForAJobDescription: string | null
     photos: PhotosType
@@ -144,7 +137,7 @@ export const updateMainPhoto = (photos: PhotosType): updateMainPhotoActionType =
 
 //thunks
 
-export const getProfile = (userID: number) => {
+export const getProfile = (userID: number | null) => {
     return (dispatch: any) => {
         profileAPI.getProfile(userID).then((data: any) => {
             dispatch(setUserProfile(data))

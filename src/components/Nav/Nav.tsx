@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Nav.module.css"
 
-function Nav(props) {
+type PropsType = {
+  userID: number
+}
+
+function Nav(props: PropsType) {
     return (
         <nav className={styles.wrapper}>
           <NavLink className={styles.item} to={props.userID ? `/profile/${props.userID}` : `/login`} activeClassName={styles.active}>Profile</NavLink>

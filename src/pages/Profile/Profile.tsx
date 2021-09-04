@@ -2,8 +2,16 @@ import ProfileCard from "./ProfileCard/ProfileCard";
 import styles from "./Profile.module.css"
 import PostsContainer from "./Posts/PostsContainer";
 import Preloader from "../../components/Preloader/Preloader";
+import { UserProfileDataType } from "../../redux/profileReducer";
 
-function Profile({profileData, authUserID, currentProfileUserID, onUploadingMainPhoto}) {
+type PropsType = {
+    profileData: UserProfileDataType
+    authUserID: number | null 
+    currentProfileUserID: number
+    onUploadingMainPhoto: (e: any) => void
+}
+
+let Profile: React.FC<PropsType> = ({profileData, authUserID, currentProfileUserID, onUploadingMainPhoto}) => {
     if (profileData == null) {
         return <Preloader />
     }

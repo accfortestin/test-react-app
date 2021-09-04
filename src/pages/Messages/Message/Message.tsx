@@ -1,6 +1,11 @@
 import styles from "./Message.module.css"
 
-function Message(props) {
+type PropsType = {
+    name: string
+    message: string
+}
+
+function Message(props: PropsType) {
     return (
         <div className={styles.message}>
             <div className={styles.person}>

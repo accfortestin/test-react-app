@@ -8,10 +8,28 @@ import twitter from './../../../assets/images/socials/twitter.png'
 import vk from './../../../assets/images/socials/vk.png'
 import website from './../../../assets/images/socials/website.png'
 import youtube from './../../../assets/images/socials/youtube.png'
-import ProfileStatusContainer from "../ProfileStatus/ProfileStatusContainer";
+import { ContactsType, PhotosType } from "../../../redux/profileReducer"
+import ProfileStatusContainer from "../ProfileStatus/ProfileStatusContainer"
 
-function ProfileCard({ fullName, lookingForAJob, lookingForAJobDescription, photos, contacts, currentProfileUserID, authUserID, onUploadingMainPhoto }) {
-  let socials = {facebook, github, instagram, mainLink, twitter, vk, website, youtube}
+type PropsType = {
+  fullName: string | null
+  lookingForAJob: boolean | null
+  lookingForAJobDescription: string | null
+  photos: PhotosType
+  contacts: ContactsType
+  currentProfileUserID: number
+  authUserID: number | null
+  onUploadingMainPhoto: (e: any) => void
+}
+
+type SocialsType = {
+  [key: string]: string
+}
+
+let socials: SocialsType = { facebook, github, instagram, mainLink, twitter, vk, website, youtube}
+
+let ProfileCard: React.FC<PropsType> = ({ fullName, lookingForAJob, lookingForAJobDescription, photos, contacts, currentProfileUserID, authUserID, onUploadingMainPhoto }) => {
+  
   return (
     <div className={styles.wrapper}>
       <div className={styles.imageWrapper}>
@@ -26,7 +44,7 @@ function ProfileCard({ fullName, lookingForAJob, lookingForAJobDescription, phot
         <div className={styles.status}><ProfileStatusContainer /></div>
         {!lookingForAJob ? "" : <div className={styles.data}>Job-hunting: {lookingForAJobDescription}</div>}
         <div className={styles.contacts}>
-          {Object.keys(contacts).map(key => {
+          {Object.keys(contacts).map((key) => {
             return contacts[key].length > 1 ? <a key={key} className={styles.contactItem} href={contacts[key]} target='_blank' rel="noreferrer"><img src={socials[key]} alt='' /></a> : ""
           })}
         </div>

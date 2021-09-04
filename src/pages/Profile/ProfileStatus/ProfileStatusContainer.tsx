@@ -1,12 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from "react-redux"
 import { withRouter } from 'react-router-dom';
-import { compose } from 'redux'
 import ProfileStatus from './ProfileStatus';
 import { getUserStatus, updateUserStatus } from '../../../redux/profileReducer'
 import { userStatusGetter } from '../../../redux/state-selectors';
+import { AppStateType } from '../../../redux/redux-store';
 
-const ProfileStatusContainer = (props) => {
+type LocalStateProps = {
+    match: any
+}
+
+type MapStateToPropsType = {
+    userStatus: string
+}
+
+type MapDispatchToPropsType = {
+    getUserStatus: (userID: number) => void
+    updateUserStatus: (status: string) => void
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & LocalStateProps
+
+const ProfileStatusContainer = (props: PropsType) => {
 
     let userID = props.match.params.userID;
     props.getUserStatus(userID);
@@ -27,7 +42,7 @@ const ProfileStatusContainer = (props) => {
         props.updateUserStatus(newStatus);
     }
 
-    const changeStatus = (e) => {
+    const changeStatus = (e: any) => {
         setNewStatus(e.target.value);
     }
 
@@ -41,11 +56,11 @@ const ProfileStatusContainer = (props) => {
     />
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     userStatus: userStatusGetter(state)
 });
 
-export default compose(
-    withRouter,
-    connect(mapStateToProps, { getUserStatus, updateUserStatus })
-)(ProfileStatusContainer);
+export default 
+    withRouter(
+    connect<MapStateToPropsType, MapDispatchToPropsType, AppStateType>(mapStateToProps, { getUserStatus, updateUserStatus }
+)(ProfileStatusContainer));

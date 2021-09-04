@@ -1,21 +1,24 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { compose } from 'redux'
+import { AppStateType } from '../../redux/redux-store'
 import { authUserIDGetter } from '../../redux/state-selectors'
 import Nav from './Nav'
 
-class NavComponent extends React.Component {
-    componentDidMount() {
-    }
+type MapStateToPropsType = {
+    userID: number
+}
+
+class NavComponent extends React.Component<MapStateToPropsType> {
     render() {
         return <Nav {...this.props} />
     }
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     userID: authUserIDGetter(state)
 });
 
 export default compose(
-    connect(mapStateToProps, {})
+    connect<MapStateToPropsType, AppStateType>(mapStateToProps, {})
 )(NavComponent);

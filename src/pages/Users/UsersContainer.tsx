@@ -79,6 +79,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
   }
 }
 
-const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType>(mapStateToProps, { setCurrentPage, getUsers, follow, unfollow, setPortionNumber })(UsersComponent);
+const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, AppStateType>(mapStateToProps, { setCurrentPage, getUsers, follow, unfollow, setPortionNumber })(UsersComponent);
   
 export default UsersContainer;

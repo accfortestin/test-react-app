@@ -1,6 +1,15 @@
 import styles from "./ProfileStatus.module.css"
 
-function ProfileStatus({enableEditMode, disableEditMode, changeStatus, editMode, userStatus, newStatus}) {
+type PropsType = {
+    enableEditMode: () => void
+    disableEditMode: () => void
+    changeStatus: (e: any) => void
+    editMode: boolean
+    userStatus: string | null
+    newStatus: string
+}
+
+let ProfileStatus: React.FC<PropsType> = ({enableEditMode, disableEditMode, changeStatus, editMode, userStatus, newStatus}) => {
 
     return (
         <div className={styles.wrapper}>

@@ -92,7 +92,7 @@ export const getAuth = () => async (dispatch: any) => {
     }
 }
 
-type LogInDataType = {
+export type LogInDataType = {
     email: string | null
     password: string | null
     rememberMe: boolean

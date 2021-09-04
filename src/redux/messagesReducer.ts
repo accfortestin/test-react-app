@@ -1,11 +1,11 @@
 const ADD_MESSAGE = 'ADD-MESSSAGE';
 
-type DialogDataType = {
+export type DialogDataType = {
     id: number
     name: string
 }
 
-type MessageDataType = {
+export type MessageDataType = {
     id: number
     author: string
     message: string
@@ -77,12 +77,12 @@ let messagesReducer = (state = initialState, action: any):InitialStateType  => {
     }
 }
 
-type AddMessageActionCreatorType = {
+type AddMessageActionType = {
     type: typeof ADD_MESSAGE
     newMessageText: string
 }
 
-export const addMessageActionCreator = (newMessageText: string): AddMessageActionCreatorType => ({
+export const addMessage = (newMessageText: string): AddMessageActionType => ({
     type: ADD_MESSAGE,
     newMessageText
 })

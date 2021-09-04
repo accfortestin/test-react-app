@@ -2,7 +2,12 @@ import styles from "./Post.module.sass"
 import like from "./images/like.png"
 import classNames from "classnames";
 
-function Post({message, likeCounter}) {
+type PropsType = {
+    message: string
+    likeCounter: number
+}
+
+let Post: React.FC<PropsType> = ({message, likeCounter}) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.image}>

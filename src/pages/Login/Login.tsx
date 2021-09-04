@@ -1,14 +1,20 @@
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import { LogInDataType } from '../../redux/auth-reducer';
 import styles from './Login.module.css'
 
+type PropsType = {
+    onSubmit: (data: LogInDataType) => void
+    error: string | null
+    captchaURL: string | null
+}
 
-
-let Login = (props) => {
+let Login: FC<PropsType> = ({onSubmit, error, captchaURL}) => {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onBlur' });
     return (
         <div className={styles.wraapper}>
             <h1 className={styles.heading}>Login</h1>
-            <form className={styles.form} onSubmit={handleSubmit((data) => props.onSubmit(data))}>
+            <form className={styles.form} onSubmit={handleSubmit((data: LogInDataType) => onSubmit(data))}>
                 <div className={styles.inputWrapper}>
                     <label htmlFor='email' className={styles.label} >Login</label>
                     <input id='email' className={styles.input} {...register('email', { required: true })} />
@@ -23,13 +29,13 @@ let Login = (props) => {
                     <input id='rememberMe' className={styles.checkbox} {...register('rememberMe')} type='checkbox' />
                     <label htmlFor='rememberMe' className={styles.label +  ' ' + styles.rememberMe} >remember me</label>
                 </div>
-                {props.captchaURL && 
+                {captchaURL && 
                     <>
-                    <div className={styles.captcha}><img src={props.captchaURL} alt="" /></div>
+                    <div className={styles.captcha}><img src={captchaURL} alt="" /></div>
                     <input id='captcha' className={styles.input} {...register('captcha', { required: true })} />
                     </>
                 }
-                {props.error && <div className={styles.error}>{props.error}</div>}
+                {error && <div className={styles.error}>{error}</div>}
                 {errors.password || errors.email ? <button className={styles.submitButton} disabled >Submit</button> : <button className={styles.submitButton} >Submit</button>}
                 
             </form>
